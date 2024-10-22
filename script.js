@@ -149,6 +149,7 @@ const subjectiveQuestions = [
 ];
 
 // 문제 리스트
+// 문제 리스트
 let allQuestions = [];
 let wrongQuestions = [];
 let userAnswers = [];
@@ -156,6 +157,28 @@ let currentQuestionIndex = 0;
 let currentQuestionType = "";
 let totalQuestions = 0;
 let isRetryMode = false;
+
+// 초성을 추출하는 함수
+function extractInitials(text) {
+    const INITIALS = ["ㄱ", "ㄲ", "ㄴ", "ㄷ", "ㄸ", "ㄹ", "ㅁ", "ㅂ", "ㅃ", "ㅅ", "ㅆ", "ㅇ", "ㅈ", "ㅉ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ"];
+    let initials = "";
+
+    for (let i = 0; i < text.length; i++) {
+        const char = text[i];
+        const code = char.charCodeAt(0) - 44032;  // 한글 유니코드 값에서 시작값(가)을 뺌
+
+        if (code >= 0 && code <= 11171) {
+            const initialIndex = Math.floor(code / 588);
+            initials += INITIALS[initialIndex];
+        } else {
+            initials += char;  // 한글이 아닌 문자 (띄어쓰기 등)는 그대로 추가
+        }
+    }
+
+    return initials;
+}
+
+
 
 // 문제 배열들을 합치고 섞기 (객관식, OX, 주관식 랜덤 순서)
 function shuffleArray(array) {
@@ -228,6 +251,18 @@ function displaySubjectiveInput() {
     const inputBox = document.getElementById("input-box");
     inputBox.classList.remove("hidden");
     document.getElementById("choices-box").innerHTML = "";
+
+    const hintButton = document.createElement("button");
+    hintButton.innerText = "힌트 보기";
+    hintButton.onclick = showHint;  // 힌트 버튼을 클릭했을 때 showHint 함수 실행
+    document.getElementById("choices-box").appendChild(hintButton);
+}
+
+function showHint() {
+    const question = allQuestions[currentQuestionIndex];
+    const correctAnswer = question.answer;
+    const initials = extractInitials(correctAnswer);
+    alert(`힌트: ${initials}`);  // 힌트는 alert 창으로 표시되도록 함
 }
 
 // 정답 확인
