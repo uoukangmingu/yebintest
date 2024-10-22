@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>문제 풀기</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div id="question-box">
+            <div class="progress-container">
+                <span id="question-number">1</span> / <span id="total-questions"></span> <!-- 초기값 제거 -->
+            </div>
+            <h2 id="question">문제가 여기에 표시됩니다.</h2>
+        </div>
+        <div id="choices-box">
+            <!-- 객관식 선택지는 여기 표시됨 -->
+        </div>
+        <div id="input-box">
+            <!-- 주관식 입력란 -->
+            <input type="text" id="answer-input" placeholder="정답 입력">
+            <button id="submit-answer">제출</button>
+        </div>
+        <button id="skip">SKIP</button>
+    </div>
+    <div id="result-box" class="hidden">
+        <h2 id="result-message">오답노트</h2>
+    <div id="wrong-answers"></div> <!-- 오답 노트 영역 -->
+    
+    <!-- 틀린 문제 다시 풀기 및 다시 시작하기 버튼 -->
+    <button id="retry-wrong" class="hidden">틀린 문제 다시 풀기</button>
+    <button id="restart">다시 시작하기</button>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

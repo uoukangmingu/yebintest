@@ -1,0 +1,220 @@
+/* 문제 상자 내 우측 상단에 진행 상황 표시 */
+.progress-container {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 1rem;
+    color: #ffffff;
+    background-color: #444; /* 어두운 색상으로 조정 */
+    padding: 8px 12px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    font-weight: bold;
+    opacity: 0.9;
+}
+
+/* 기본 스타일 */
+body {
+    font-family: 'Noto Sans', sans-serif;
+    background-color: #1e1e1e; /* 어두운 배경 색상 */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+
+.container {
+    background-color: #333333; /* 중간톤의 어두운 배경 */
+    border-radius: 12px;
+    padding: 40px 30px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5); /* 더 진한 그림자 */
+    max-width: 600px;
+    width: 100%;
+    text-align: center;
+    position: relative;
+    border-top: 8px solid #00796b;
+}
+
+/* 숨김 처리 */
+.hidden {
+    display: none;
+}
+
+/* 문제 텍스트 */
+#question {
+    font-size: 1.8rem;
+    color: #f1f1f1; /* 밝은 색 텍스트 */
+    margin-bottom: 30px;
+    font-weight: bold;
+    line-height: 1.4;
+}
+
+/* 선택지 박스 */
+#choices-box {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+/* 버튼 스타일 */
+button {
+    padding: 15px;
+    margin: 10px;
+    background-color: #00796b;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+button:hover {
+    background-color: #00695c;
+    transform: scale(1.03);
+}
+
+button:active {
+    background-color: #004d40;
+    transform: scale(1);
+}
+
+/* 주관식 입력란 스타일 */
+input[type="text"] {
+    padding: 15px;
+    width: calc(100% - 30px);
+    margin-bottom: 25px;
+    border: 2px solid #00796b;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    outline: none;
+    background-color: #444; /* 어두운 입력란 */
+    color: #f1f1f1;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+input[type="text"]:focus {
+    border-color: #004d40;
+}
+
+/* SKIP 버튼 스타일 */
+#skip {
+    background-color: #f57c00;
+}
+
+#skip:hover {
+    background-color: #e65100;
+    transform: scale(1.03);
+}
+
+#skip:active {
+    background-color: #bf360c;
+    transform: scale(1);
+}
+
+/* 결과 박스 */
+#result-box {
+    background-color: #333;
+    border-radius: 12px;
+    padding: 40px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5);
+    max-width: 600px;
+    margin-top: 30px;
+    text-align: center;
+}
+
+/* 결과 메시지 */
+#result-message {
+    font-size: 2rem;
+    color: #80cbc4;
+    margin-bottom: 30px;
+    font-weight: bold;
+}
+
+/* 재시작 및 틀린 문제 풀기 버튼 */
+#retry-wrong, #restart {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#retry-wrong:hover, #restart:hover {
+    background-color: #0056b3;
+}
+
+#retry-wrong:active, #restart:active {
+    background-color: #1b5e20;
+    transform: scale(1);
+}
+
+/* 반응형 디자인 - 작은 화면 (모바일) 대응 */
+@media (max-width: 768px) {
+    .container {
+        padding: 30px 20px;
+        max-width: 90%;
+    }
+
+    #question {
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+    }
+
+    button {
+        font-size: 1rem;
+        padding: 12px;
+    }
+
+    input[type="text"] {
+        font-size: 1rem;
+        padding: 12px;
+    }
+
+    #result-message {
+        font-size: 1.7rem;
+    }
+}
+
+/* 반응형 디자인 - 매우 작은 화면 (폰) 대응 */
+@media (max-width: 480px) {
+    .container {
+        padding: 20px 15px;
+        max-width: 95%;
+    }
+
+    #question {
+        font-size: 1.3rem;
+        margin-bottom: 15px;
+    }
+
+    button {
+        font-size: 0.9rem;
+        padding: 10px;
+    }
+
+    input[type="text"] {
+        font-size: 0.9rem;
+        padding: 10px;
+    }
+
+    #result-message {
+        font-size: 1.5rem;
+    }
+}
+
+#result-box ul {
+    max-height: 400px; /* 최대 높이 설정 */
+    overflow-y: auto;  /* 스크롤 가능 */
+    padding: 10px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+}
